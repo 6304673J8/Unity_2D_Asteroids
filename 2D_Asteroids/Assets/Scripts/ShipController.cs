@@ -20,6 +20,7 @@ public class ShipController : MonoBehaviour
     private bool isDead = false;
 
     private Rigidbody2D shipRb;
+    private BoxCollider2D shipCollider;
 
     private float horizontal;
     private bool shooting;
@@ -36,6 +37,7 @@ public class ShipController : MonoBehaviour
     {
         //Gameflow
         shipRb = gameObject.GetComponent<Rigidbody2D>();
+        shipCollider = gameObject.GetComponent<BoxCollider2D>();
         shipRb.drag = drag;
         transform.position = new Vector3(0.0f, -2.0f, 0.0f);
 
@@ -51,35 +53,38 @@ public class ShipController : MonoBehaviour
     void Update()
     {
         bool isMoving = false;
+        bool isRotatingLeft = false;
+        bool isRotatingRight = false;
+        bool isShooting = false;
+
         horizontal = InputManager.Horizontal;
         Rotate();
-        //bool isRotatingLeft = false;
-        //bool isRotatingRight = false;
         if (Input.GetKey(KeyCode.W))
         {
             isMoving = true;
         }
-        animator.SetBool(moveParamID, isMoving);
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            isRotatingLeft = true;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            isRotatingRight = true;
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             animator.SetTrigger(shootParamID);
         }
-        if(characterHealth <= 0 && !isDead)
+        if (characterHealth <= 0 && !isDead)
         {
             isDead = true;
             animator.SetTrigger(dieParamID);
         }
-        /*if (Input.GetKey(KeyCode.A))
-        {
-            isRotatingLeft = true;
-        }
-        animator.SetBool(moveParamID, isRotatingLeft);
-        if (Input.GetKey(KeyCode.D))
-        {
-            isRotatingRight = true;
-        }
-        animator.SetBool(moveParamID, isRotatingRight);*/
+        animator.SetBool(moveParamID, isMoving);
+        animator.SetBool(turnRightParamID, isRotatingRight);
+        animator.SetBool(turnLeftParamID, isRotatingLeft);
     }
 
     private void FixedUpdate()

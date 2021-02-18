@@ -348,7 +348,10 @@ MonoBehaviour:
   drag: 1
   angularSpeed: 180
   bulletPosition: 0
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 2286673168711091614, guid: 8858195c9b065634082b25cb98f67329,
+    type: 3}
+  rotationSpeed: 2
+  fireRate: 420
   characterHealth: 10
 --- !u!61 &604127478
 BoxCollider2D:

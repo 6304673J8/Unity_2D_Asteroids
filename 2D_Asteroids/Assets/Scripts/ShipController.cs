@@ -13,7 +13,10 @@ public class ShipController : MonoBehaviour
     //Bullets
     public float bulletPosition;
     public GameObject bulletPrefab;
-
+    
+    public float rotationSpeed = 2;
+    private float timeToShoot = 0;
+    public float fireRate = 420;
     //Gameflow
     public int characterHealth = 10;
 
@@ -23,8 +26,7 @@ public class ShipController : MonoBehaviour
     private BoxCollider2D shipCollider;
 
     private float horizontal;
-    private bool shooting;
-
+    //Animator
     private Animator animator;
     private int moveParamID;
     private int turnLeftParamID;
@@ -52,10 +54,10 @@ public class ShipController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float delta = Time.deltaTime * fireRate;
         bool isMoving = false;
         bool isRotatingLeft = false;
         bool isRotatingRight = false;
-        bool isShooting = false;
 
         horizontal = InputManager.Horizontal;
         Rotate();
@@ -73,9 +75,27 @@ public class ShipController : MonoBehaviour
             isRotatingRight = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        //Shoot logic
+        bool canShoot = false;
+        if (Input.GetKey(KeyCode.Space))
         {
+            timeToShoot += delta;
+            if (timeToShoot > fireRate)
+            {
+                canShoot = true;
+                timeToShoot = 0;
+            }
+        } 
+        else
+        {
+            timeToShoot = 0;
+        }
+        if (Input.GetKeyDown(KeyCode.Space) || canShoot)
+        {
+            timeToShoot = 0;
             animator.SetTrigger(shootParamID);
+            GameObject bullet = Instantiate(bulletPrefab, transform.position + transform.up * 21, transform.rotation);
+            Destroy(bullet, 8);
         }
         if (characterHealth <= 0 && !isDead)
         {
@@ -108,7 +128,7 @@ public class ShipController : MonoBehaviour
         transform.Rotate(0, 0, -angularSpeed * horizontal * Time.deltaTime);
     }
 
-    private void Shoot () {
+    /*private void Shoot () {
         if (shooting)
         {
             var pos = transform.up * bulletPosition + transform.position;
@@ -117,5 +137,5 @@ public class ShipController : MonoBehaviour
                 );
             Destroy(bullet, 5);
         }
-    }
+    }*/
 }

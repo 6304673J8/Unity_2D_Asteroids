@@ -23,7 +23,7 @@ public class ShipController : MonoBehaviour
     private bool isDead = false;
 
     private Rigidbody2D shipRb;
-    private BoxCollider2D shipCollider;
+    //private BoxCollider2D shipCollider;
 
     private float horizontal;
     //Animator
@@ -32,14 +32,14 @@ public class ShipController : MonoBehaviour
     private int turnLeftParamID;
     private int turnRightParamID;
     private int shootParamID;
-    private int dieParamID;
+    //private int dieParamID;
 
     // Start is called before the first frame update
     void Start()
     {
         //Gameflow
         shipRb = gameObject.GetComponent<Rigidbody2D>();
-        shipCollider = gameObject.GetComponent<BoxCollider2D>();
+        //shipCollider = gameObject.GetComponent<BoxCollider2D>();
         shipRb.drag = drag;
         transform.position = new Vector3(0.0f, -2.0f, 0.0f);
 
@@ -100,7 +100,7 @@ public class ShipController : MonoBehaviour
         if (characterHealth <= 0 && !isDead)
         {
             isDead = true;
-            animator.SetTrigger(dieParamID);
+            //animator.SetTrigger(dieParamID);
         }
         animator.SetBool(moveParamID, isMoving);
         animator.SetBool(turnRightParamID, isRotatingRight);
@@ -128,14 +128,10 @@ public class ShipController : MonoBehaviour
         transform.Rotate(0, 0, -angularSpeed * horizontal * Time.deltaTime);
     }
 
-    /*private void Shoot () {
-        if (shooting)
-        {
-            var pos = transform.up * bulletPosition + transform.position;
-            var bullet = Instantiate(
-                    bulletPrefab, pos, transform.rotation
-                );
-            Destroy(bullet, 5);
-        }
-    }*/
+    public void Lose()
+    {
+        shipRb.velocity = Vector3.zero;
+        transform.position = Vector3.zero;
+        transform.Rotate(0, 0, 0);
+    }
 }

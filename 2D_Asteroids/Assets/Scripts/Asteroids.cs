@@ -6,6 +6,11 @@ public class Asteroids : MonoBehaviour
 {
     private Rigidbody2D AsteroidRb;
     public float speed = 4;
+    public GameObject[] listAsteroids;
+    public int sizeListAsteroids;
+
+    private bool isDestroyed = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,18 +25,33 @@ public class Asteroids : MonoBehaviour
                                 ).normalized * speed;
         AsteroidRb.angularVelocity = Random.Range(-50f, 50f);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (isDestroyed)
+            return;
+
         if (collision.CompareTag("Bullet"))
         {
+            isDestroyed = true;
             Destroy(gameObject);
             Destroy(collision.gameObject);
+            for (var i = 0; i < sizeListAsteroids; i++)
+            {
+                Instantiate(
+                    listAsteroids[Random.Range(0, listAsteroids.Length)],
+                    transform.position,
+                    Quaternion.identity
+                );
+            }
         }
+        if (collision.CompareTag("playerShip"))
+        {
+            var asteroids = FindObjectsOfType<Asteroids>();
+            for(var i = 0; i < asteroids.Length; i++) {
+                Destroy(asteroids[i].gameObject);
+            }
+            collision.GetComponent<ShipController>().Lose();
+        }
+
     }
 }

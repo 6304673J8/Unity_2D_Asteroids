@@ -44,14 +44,14 @@ public class Asteroids : MonoBehaviour
                 );
             }
         }
-        if (collision.CompareTag("playerShip"))
+        /*if (collision.CompareTag("playerShip"))
         {
             var asteroids = FindObjectsOfType<Asteroids>();
             for(var i = 0; i < asteroids.Length; i++) {
                 Destroy(asteroids[i].gameObject);
             }
             collision.GetComponent<ShipController>().Lose();
-        }
+        }*/
 
     }
 }

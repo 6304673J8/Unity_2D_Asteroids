@@ -9,9 +9,16 @@ public class Asteroids : MonoBehaviour
     public GameObject[] listAsteroids;
     public int sizeListAsteroids;
 
+    private GameObject[] activeAsteroids;
+    
     private bool isDestroyed = false;
-
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        activeAsteroids = GameObject.FindGameObjectsWithTag("Asteroid");
+        Debug.Log(activeAsteroids);
+    }
     void Start()
     {
         AsteroidRb = GetComponent<Rigidbody2D> ();
@@ -35,6 +42,8 @@ public class Asteroids : MonoBehaviour
             isDestroyed = true;
             Destroy(gameObject);
             Destroy(collision.gameObject);
+
+            
             for (var i = 0; i < sizeListAsteroids; i++)
             {
                 Instantiate(
@@ -43,6 +52,12 @@ public class Asteroids : MonoBehaviour
                     Quaternion.identity
                 );
             }
+            //collision.GetComponent<AsteroidAnalyzer>().Victory();
+        }
+        if (activeAsteroids.Length == 0)
+        {
+            Debug.Log("Crack");
+            //SceneManager.LoadScene("LostScene");
         }
         /*if (collision.CompareTag("playerShip"))
         {

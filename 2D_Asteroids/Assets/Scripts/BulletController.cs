@@ -12,10 +12,4 @@ public class BulletController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.up * baseSpeed;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

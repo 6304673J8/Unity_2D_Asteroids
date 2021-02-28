@@ -498,15 +498,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: GaelB
       objectReference: {fileID: 0}
+    - target: {fileID: 7409918224284968763, guid: a1b8b2fb751594c4f9ec69f11c5ea2fb,
+        type: 3}
+      propertyPath: listAsteroids.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7409918224284968763, guid: a1b8b2fb751594c4f9ec69f11c5ea2fb,
+        type: 3}
+      propertyPath: listAsteroids.Array.data[1]
+      value: 
+      objectReference: {fileID: 4003785649180225683, guid: b69f078547a8aa7459eb5d560d62a51a,
+        type: 3}
+    - target: {fileID: 7409918224284968763, guid: a1b8b2fb751594c4f9ec69f11c5ea2fb,
+        type: 3}
+      propertyPath: sizeListAsteroids
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7409918224284968767, guid: a1b8b2fb751594c4f9ec69f11c5ea2fb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -132.6
+      value: -114
       objectReference: {fileID: 0}
     - target: {fileID: 7409918224284968767, guid: a1b8b2fb751594c4f9ec69f11c5ea2fb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 42.3
+      value: 248
       objectReference: {fileID: 0}
     - target: {fileID: 7409918224284968767, guid: a1b8b2fb751594c4f9ec69f11c5ea2fb,
         type: 3}

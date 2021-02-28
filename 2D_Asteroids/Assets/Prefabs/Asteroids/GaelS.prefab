@@ -184,3 +184,4 @@ MonoBehaviour:
   speed: 184
   listAsteroids: []
   sizeListAsteroids: 0
+  puntazo: 0

@@ -182,6 +182,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4515aeb51147f6a4682e8ae036418f69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 222
+  speed: 202
   listAsteroids: []
   sizeListAsteroids: 0

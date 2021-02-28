@@ -185,4 +185,5 @@ MonoBehaviour:
   speed: 42
   listAsteroids:
   - {fileID: 4538695819946281492, guid: a8e772a33112e3648897659d7028325b, type: 3}
-  sizeListAsteroids: 24
+  sizeListAsteroids: 12
+  puntazo: 0

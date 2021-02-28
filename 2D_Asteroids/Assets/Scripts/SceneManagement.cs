@@ -8,14 +8,7 @@ public class SceneManagement : MonoBehaviour
     private int nextSceneToLoad;
     private int sceneToLoad;
     private GameObject[] activeAsteroids;
-    public enum Scene
-    {
-        TitleScene,
-        GameScene_First,
-        GameScene_Last,
-        WonScene,
-        LostScene
-    }
+    private GameObject[] activeShip;
 
     private void Start()
     {
@@ -32,25 +25,22 @@ public class SceneManagement : MonoBehaviour
         switch (sceneToLoad)
         {
             case 0:
-                if (Input.GetKey(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    Debug.Log("test_space");
-                    nextSceneToLoad++;
+                    LoadGameScene();
                 }
                 break;
             case 1:
-                Debug.Log("test_asteroide 1");
                 AsteroidsAnalyzer();
                 break;
             case 2:
-                Debug.Log("test_asteroide 2");
                 AsteroidsAnalyzer();
                 break;
             case 3:
-                ReturnToTitleScreen();
+                LoadTitleScene();
                 break;
             case 4:
-                ReturnToTitleScreen();
+                LoadTitleScene();
                 break;
         }
     }
@@ -58,17 +48,46 @@ public class SceneManagement : MonoBehaviour
     private void AsteroidsAnalyzer()
     {
         activeAsteroids = GameObject.FindGameObjectsWithTag("Asteroid");
-        if (activeAsteroids.Length == 0)
+        activeShip = GameObject.FindGameObjectsWithTag("playerShip");
+
+        if (sceneToLoad == 1)
         {
-            sceneToLoad++;
+            if (activeAsteroids.Length == 0)
+            {
+                SceneManager.LoadScene(nextSceneToLoad);
+            }
+            if (activeShip.Length == 0)
+            {
+                LoadLostScene();
+            }
+        }
+        else if(sceneToLoad == 2)
+        {
+            if (activeAsteroids.Length == 0)
+            {
+                SceneManager.LoadScene(4);
+            }
+            if (activeShip.Length == 0)
+            {
+                LoadLostScene();
+            }
         }
     }
 
-    private void ReturnToTitleScreen()
+    private void LoadTitleScene()
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            sceneToLoad = 0;
+            SceneManager.LoadScene(0);
         }
+    }
+    private void LoadGameScene()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    private void LoadLostScene()
+    {
+        SceneManager.LoadScene(3);
     }
 }

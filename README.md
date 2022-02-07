@@ -1,2 +1,3 @@
-# 2D_Asteroids
-Learning Unity by Developing Custom Asteroids Game with Animations
+# 2D_CustomAsteroids
+Learning Unity by Developing A Custom Asteroids Game With Animations.
+Most Assets Created By Myself With Photoshop.
